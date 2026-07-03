@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Victor Otelakoski | Desenvolvedor</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #020617;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.18), transparent 30%),
+                radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.15), transparent 35%),
+                radial-gradient(circle at 50% 90%, rgba(34, 197, 94, 0.10), transparent 35%);
+            z-index: -2;
+            animation: backgroundMove 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundMove {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.15);
+            }
+        }
+
+        header {
+            width: 100%;
+            padding: 24px 8%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(2, 6, 23, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            animation: slideDown .8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            display: flex;
+            gap: 45px;
+        }
+
+        nav a {
+            position: relative;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            width: 0%;
+            height: 2px;
+            background: #38bdf8;
+            transform: translateX(-50%);
+            transition: .35s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding: 160px 8% 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 950px;
+            animation: fadeUp 1s ease forwards;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 10px 18px;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.08);
+            color: #7dd3fc;
+            margin-bottom: 28px;
+            animation: pulse 2.5s infinite;
+        }
+
+
+        .project-group {
+            margin-bottom: 70px;
+        }
+
+        .project-group-title {
+            font-size: 26px;
+            color: #f8fafc;
+            margin-bottom: 28px;
+            padding-left: 18px;
+            border-left: 4px solid #38bdf8;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.35);
+            }
+
+            70% {
+                box-shadow: 0 0 0 18px rgba(56, 189, 248, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 8vw, 86px);
+            line-height: 1.05;
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, #f8fafc, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 20px;
+            max-width: 760px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #38bdf8;
+            color: #020617;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: #f8fafc;
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
+        }
+
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 18px;
+            color: #38bdf8;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 55px;
+            font-size: 18px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-category {
+            background: rgba(15, 23, 42, .75);
+            border: 1px solid rgba(148, 163, 184, .15);
+            border-radius: 22px;
+            padding: 28px;
+            transition: .35s;
+            backdrop-filter: blur(16px);
+        }
+
+        .tech-category:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
+            box-shadow: 0 20px 50px rgba(56, 189, 248, .15);
+        }
+
+        .tech-category h3 {
+            color: #38bdf8;
+            margin-bottom: 22px;
+            font-size: 22px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-tags span {
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: #1e293b;
+            border: 1px solid rgba(148, 163, 184, .12);
+            transition: .25s;
+            cursor: default;
+            font-size: 14px;
+            color: #e2e8f0;
+        }
+
+        .tech-tags span:hover {
+            background: #38bdf8;
+            color: #020617;
+            transform: scale(1.08);
+        }
+
+        .about-box {
+            max-width: 950px;
+            margin: auto;
+            padding: 38px;
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .about-box p {
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 26px;
+        }
+
+        .card {
+            position: relative;
+            padding: 30px;
+            border-radius: 22px;
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid rgba(148, 163, 184, 0.17);
+            backdrop-filter: blur(16px);
+            overflow: hidden;
+            transition: 0.4s ease;
+            transform: translateY(40px);
+            opacity: 0;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 130px;
+            height: 130px;
+            background: rgba(56, 189, 248, 0.16);
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        .card:hover::before {
+            transform: scale(2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.12);
+        }
+
+        .card h3 {
+            position: relative;
+            font-size: 22px;
+            margin-bottom: 14px;
+            color: #f8fafc;
+            z-index: 2;
+        }
+
+        .card p {
+            position: relative;
+            color: #cbd5e1;
+            line-height: 1.7;
+            z-index: 2;
+        }
+
+        .tech-list {
+            display: grid;
+            gap: 24px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .tech-item {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.17);
+            padding: 24px;
+            border-radius: 18px;
+        }
+
+        .tech-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #e2e8f0;
+            font-weight: 700;
+        }
+
+        .bar {
+            height: 10px;
+            background: #1e293b;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .bar span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #38bdf8, #a855f7);
+            border-radius: 999px;
+            transition: width 1.5s ease;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .project-card {
+            min-height: 260px;
+            padding: 30px;
+            border-radius: 24px;
+            background:
+                linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.7));
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            transition: 0.4s;
+        }
+
+        .project-card:hover {
+            transform: rotateX(4deg) rotateY(-4deg) translateY(-8px);
+            border-color: #38bdf8;
+            box-shadow: 0 30px 70px rgba(56, 189, 248, 0.15);
+        }
+
+        .project-tag {
+            display: inline-block;
+            margin-bottom: 22px;
+            padding: 8px 13px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.1);
+            color: #7dd3fc;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .project-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .project-card p {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            text-align: center;
+        }
+
+        .stat {
+            padding: 34px;
+            border-radius: 22px;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.17);
+        }
+
+        .stat h3 {
+            font-size: 42px;
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+            color: #cbd5e1;
+        }
+
+        footer {
+            padding: 35px 8%;
+            text-align: center;
+            color: #94a3b8;
+            border-top: 1px solid rgba(148, 163, 184, 0.15);
+            background: rgba(2, 6, 23, 0.8);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(45px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding-top: 190px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 70px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="#sobre">Sobre</a>
+            <a href="#atuacao">Atuação</a>
+            <a href="#tecnologias">Tecnologias</a>
+            <a href="#projetos">Projetos</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">Desenvolvedor de Full-Stack</span>
+
+                <h1>Victor Otelakoski</h1>
+
+                <p>
+                    Desenvolvimento de tecnologias web, e-commerces, marketplaces e aplicativos
+                    com foco em experiência do usuário e crescimento de negócios.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#projetos" class="btn btn-primary">Ver projetos</a>
+                    <a href="#atuacao" class="btn btn-secondary">Áreas de atuação</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre">
+            <h2 class="section-title">Sobre mim</h2>
+
+
+            <div class="about-box">
+                <p>
+                    Sou uma pessoa extremamente organizada, metódica e curiosa. Gosto de manter
+                    uma rotina estruturada, aprender coisas novas e me desafiar constantemente. Nos momentos livres,
+                    costumo praticar esportes, ler, estudar e buscar novos conhecimentos, pois acredito que a evolução
+                    pessoal é um processo contínuo.
+                </p>
+            </div>
+        </section>
+
+        <section id="atuacao">
+            <h2 class="section-title">Áreas de atuação</h2>
+            <p class="section-subtitle">
+                Soluções digitais pensadas para diferentes necessidades do mercado.
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Tecnologias Web</h3>
+                    <p>
+                        Criação de sites, landing pages, sistemas web e interfaces responsivas,
+                        modernas e otimizadas para diferentes dispositivos.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>E-commerce</h3>
+                    <p>
+                        Desenvolvimento de lojas virtuais com foco em navegação simples, boa experiência
+                        de compra e aumento de conversão.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Marketplace</h3>
+                    <p>
+                        Estruturas digitais para venda de produtos e serviços com múltiplas categorias,
+                        fornecedores ou modelos comerciais.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Aplicativos</h3>
+                    <p>
+                        Desenvolvimento e planejamento de aplicações digitais para web e mobile,
+                        conectando tecnologia com objetivos de negócio.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="tecnologias">
+            <h2 class="section-title">Tecnologias & Especialidades</h2>
+
+            <p class="section-subtitle">
+                Ferramentas, linguagens e plataformas utilizadas no desenvolvimento de aplicações web,
+                e-commerce, integrações e soluções escaláveis.
+            </p>
+
+            <div class="tech-grid">
+
+                <div class="tech-category">
+                    <h3>Front-end</h3>
+
+                    <div class="tech-tags">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>JavaScript</span>
+                        <span>Bootstrap</span>
+                        <span>Tailwind CSS</span>
+                        <span>jQuery</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Back-end</h3>
+
+                    <div class="tech-tags">
+                        <span>Python</span>
+                        <span>Django</span>
+                        <span>PHP</span>
+                        <span>Node.js</span>
+                        <span>REST API</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Banco de Dados</h3>
+
+                    <div class="tech-tags">
+                        <span>MySQL</span>
+                        <span>SQLite</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>E-commerce</h3>
+
+                    <div class="tech-tags">
+                        <span>Shopify</span>
+                        <span>Yampi</span>
+                        <span>Mercado Livre</span>
+                        <span>Bling</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Integrações</h3>
+
+                    <div class="tech-tags">
+                        <span>Webhooks</span>
+                        <span>REST APIs</span>
+                        <span>Pagar.me</span>
+                        <span>AppMax</span>
+                        <span>Mercado Pago</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Ferramentas</h3>
+
+                    <div class="tech-tags">
+                        <span>Git</span>
+                        <span>GitHub</span>
+                        <span>Docker</span>
+                        <span>VS Code</span>
+                        <span>Figma</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projetos">
+            <h2 class="section-title">Projetos</h2>
+            <p class="section-subtitle">
+                Experiência prática em marketplaces, e-commerce, aplicativos, integrações, ERP e automações comerciais.
+            </p>
+
+            <div class="project-group">
+                <h3 class="project-group-title">Projetos sólidos e experiências reais</h3>
+
+                <div class="projects">
+                    <div class="project-card">
+                        <span class="project-tag">Marketplace White Label</span>
+                        <h3>Dental Market</h3>
+                        <p>
+                            Experiência com gestão de produtos, criação de páginas de venda,
+                            estilização por meio de programação e estruturação de marketplace
+                            voltado para operação comercial.
+                        </p>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-tag">E-commerce</span>
+                        <h3>Dental Market.shop</h3>
+                        <p>
+                            Atuação com Shopify, Yampi e gateways de pagamento como Mercado Livre,
+                            AppMax e Pagar.me. Gestão de lead, funil de venda, fluxo de pós-venda,
+                            webhooks e integrações via APIs.
+                        </p>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-tag">Aplicativo + Painel Admin</span>
+                        <h3>Confdent</h3>
+                        <p>
+                            Desenvolvimento de aplicativo para iOS e Android com integração em banco
+                            de dados homologação e produção, painel com dashboard e ambiente
+                            administrativo para gestão da solução.
+                        </p>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-tag">ERP</span>
+                        <h3>Bling</h3>
+                        <p>
+                            Experiência com software de planejamento de recursos empresariais para
+                            integração de produtos, clientes, pedidos, faturamento e logística.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-group">
+                <h3 class="project-group-title">Projetos pilotos e em desenvolvimento</h3>
+
+                <div class="projects">
+                    <div class="project-card">
+                        <span class="project-tag">ERP Próprio</span>
+                        <h3>ERP Personalizado</h3>
+                        <p>
+                            Desenvolvimento de um ERP próprio para controle de produtos, clientes,
+                            pedidos, gestão comercial e processos internos.
+                        </p>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-tag">Produtividade</span>
+                        <h3>Gerenciador de Tempo</h3>
+                        <p>
+                            Aplicativo para gerenciamento de tempo, organização de tarefas e listagem
+                            de atividades com foco em produtividade pessoal e operacional.
+                        </p>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-tag">Fitness App</span>
+                        <h3>Administração de Treinos</h3>
+                        <p>
+                            Aplicativo para administração de treinos, controle de cargas, evolução
+                            de exercícios e acompanhamento de desempenho na academia.
+                        </p>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-tag">CRM + Marketing</span>
+                        <h3>CRM Próprio</h3>
+                        <p>
+                            Desenvolvimento de CRM próprio com disparador de mensagens de marketing,
+                            organização de leads e estruturação de fluxos comerciais.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Visão profissional</h2>
+            <p class="section-subtitle">
+                Tecnologia aplicada com foco em construção, performance e resultado.
+            </p>
+
+            <div class="stats">
+                <div class="stat">
+                    <h3 data-count="5">0</h3>
+                    <p>Áreas principais</p>
+                </div>
+
+                <div class="stat">
+                    <h3 data-count="100">0</h3>
+                    <p>Foco em qualidade</p>
+                </div>
+
+                <div class="stat">
+                    <h3 data-count="360">0</h3>
+                    <p>Visão digital completa</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 Victor Otelakoski. Portfólio de Desenvolvedor.
+    </footer>
+
+    <script>
+        const cards = document.querySelectorAll(".card");
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        cards.forEach((card) => {
+            cardObserver.observe(card);
+        });
+
+        const bars = document.querySelectorAll(".bar span");
+
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.dataset.width;
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        bars.forEach((bar) => {
+            barObserver.observe(bar);
+        });
+
+        const counters = document.querySelectorAll("[data-count]");
+        let countersStarted = false;
+
+        function animateCounters() {
+            if (countersStarted) return;
+
+            counters.forEach((counter) => {
+                const target = Number(counter.dataset.count);
+                let current = 0;
+                const increment = target / 80;
+
+                const updateCounter = () => {
+                    current += increment;
+
+                    if (current < target) {
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            });
+
+            countersStarted = true;
+        }
+
+        const statsSection = document.querySelector(".stats");
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                }
+            });
+        }, {
+            threshold: 0.4
+        });
+
+        statsObserver.observe(statsSection);
+
+        const projectCards = document.querySelectorAll(".project-card");
+
+        projectCards.forEach((card) => {
+            card.addEventListener("mousemove", (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const rotateY = ((x / rect.width) - 0.5) * 10;
+                const rotateX = ((y / rect.height) - 0.5) * -10;
+
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+
+            card.addEventListener("mouseleave", () => {
+                card.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0)";
+            });
+        });
+    </script>
+
+</body>
+
+</html>
