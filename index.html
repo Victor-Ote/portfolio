@@ -482,26 +482,31 @@
         }
 
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
+            @media (max-width: 768px) {
 
-            nav a {
-                margin: 0 8px;
-                font-size: 14px;
-            }
+                header {
+                    padding: 18px 20px;
+                    justify-content: center;
+                }
 
-            .hero {
-                padding-top: 190px;
-            }
+                nav {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 18px;
+                    width: 100%;
+                }
 
-            .hero p {
-                font-size: 17px;
-            }
+                nav a {
+                    margin: 0;
+                    font-size: 14px;
+                }
 
-            section {
-                padding: 70px 6%;
+                .hero {
+                    padding-top: 150px;
+                }
+
             }
         }
     </style>
@@ -660,13 +665,13 @@
                 </div>
 
                 <div class="tech-category">
-                    <h3>Ferramentas</h3>
+                    <h3>Inteligência Artificial</h3>
 
                     <div class="tech-tags">
-                        <span>Git</span>
-                        <span>GitHub</span>
-                        <span>Docker</span>
-                        <span>VS Code</span>
+                        <span>Codex</span>
+                        <span>GitHub Copilot</span>
+                        <span>Lovable</span>
+                        <span>Claude</span>
                         <span>Figma</span>
                     </div>
                 </div>
